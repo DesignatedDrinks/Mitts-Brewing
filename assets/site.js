@@ -1,8 +1,13 @@
 (() => {
-  const mobileNavFix = document.createElement("style");
-  mobileNavFix.textContent = `
-    .eyebrow {
-      display: none !important;
+  const siteEmail = "hello@mittsbrewing.com";
+  const mobileQuery = window.matchMedia("(max-width: 1050px)");
+
+  const runtimeStyles = document.createElement("style");
+  runtimeStyles.textContent = `
+    [aria-disabled="true"].button {
+      cursor: default;
+      opacity: .72;
+      pointer-events: none;
     }
     @media (max-width: 1050px) {
       [data-site-header] {
@@ -28,9 +33,7 @@
       }
     }
   `;
-  document.head.appendChild(mobileNavFix);
-
-  document.querySelectorAll(".eyebrow").forEach((element) => element.remove());
+  document.head.appendChild(runtimeStyles);
 
   const navGroups = [
     {
@@ -55,11 +58,11 @@
     }
   ];
 
-  const current = location.pathname.split("/").pop() || "index.html";
-  const activeFor = (href) => {
-    if (current === href) return true;
-    if (current === "premium-lager.html" && href === "beers.html") return true;
-    if (current.startsWith("journal-") && href === "journal.html") return true;
+  const currentPage = location.pathname.split("/").pop() || "index.html";
+  const isActivePage = (href) => {
+    if (currentPage === href) return true;
+    if (currentPage === "premium-lager.html" && href === "beers.html") return true;
+    if (currentPage.startsWith("journal-") && href === "journal.html") return true;
     return false;
   };
 
@@ -69,7 +72,7 @@
       <div class="nav-group">
         <span class="nav-group-label">${label}</span>
         <div class="nav-group-links">
-          ${items.map(([itemLabel, href]) => `<a href="${href}" ${activeFor(href) ? 'aria-current="page"' : ""}>${itemLabel}</a>`).join("")}
+          ${items.map(([itemLabel, href]) => `<a href="${href}" ${isActivePage(href) ? 'aria-current="page"' : ""}>${itemLabel}</a>`).join("")}
         </div>
       </div>
     `).join("");
@@ -93,19 +96,18 @@
           </div>
         </div>
       </header>
-      <button class="nav-backdrop" type="button" aria-label="Close menu" tabindex="-1"></button>`;
+      <button class="nav-backdrop" type="button" aria-label="Close menu" aria-hidden="true" tabindex="-1"></button>`;
 
     const siteHeader = headerTarget.querySelector(".site-header");
     const toggle = headerTarget.querySelector(".menu-toggle");
     const nav = headerTarget.querySelector(".site-nav");
     const backdrop = headerTarget.querySelector(".nav-backdrop");
-    const mobileQuery = window.matchMedia("(max-width: 1050px)");
     let menuOpen = false;
 
     const syncNavTop = () => {
       if (!siteHeader) return;
-      const bottom = Math.max(0, Math.round(siteHeader.getBoundingClientRect().bottom));
-      document.documentElement.style.setProperty("--mobile-nav-top", `${bottom}px`);
+      const headerBottom = Math.max(0, Math.round(siteHeader.getBoundingClientRect().bottom));
+      document.documentElement.style.setProperty("--mobile-nav-top", `${headerBottom}px`);
     };
 
     const updateNavInteractivity = () => {
@@ -115,6 +117,7 @@
 
     const setMenu = (open, restoreFocus = false) => {
       if (!nav || !toggle) return;
+
       menuOpen = Boolean(open && mobileQuery.matches);
       if (menuOpen) syncNavTop();
 
@@ -122,6 +125,7 @@
       document.body.classList.toggle("nav-open", menuOpen);
       toggle.setAttribute("aria-expanded", String(menuOpen));
       toggle.setAttribute("aria-label", menuOpen ? "Close menu" : "Open menu");
+      backdrop?.setAttribute("aria-hidden", String(!menuOpen));
       updateNavInteractivity();
 
       if (menuOpen) {
@@ -152,11 +156,10 @@
       }
 
       if (event.key !== "Tab") return;
-      const focusable = [toggle, ...nav.querySelectorAll("a[href]")].filter((element) => !element.hasAttribute("inert"));
-      if (!focusable.length) return;
-
+      const focusable = [toggle, ...nav.querySelectorAll("a[href]")];
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -172,7 +175,12 @@
       updateNavInteractivity();
     };
 
-    mobileQuery.addEventListener?.("change", handleViewportChange);
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", handleViewportChange);
+    } else {
+      mobileQuery.addListener(handleViewportChange);
+    }
+
     window.addEventListener("resize", handleViewportChange, { passive: true });
     window.addEventListener("orientationchange", handleViewportChange, { passive: true });
     window.addEventListener("pageshow", handleViewportChange);
@@ -202,6 +210,7 @@
       event.preventDefault();
       const email = String(new FormData(form).get("email") || "").trim();
       const status = form.parentElement?.querySelector("[data-newsletter-status]") || document.querySelector("[data-newsletter-status]");
+
       if (!email) {
         if (status) status.textContent = "Enter your email address.";
         form.querySelector('input[type="email"]')?.focus();
@@ -211,14 +220,14 @@
       if (status) status.textContent = "Opening your email app…";
       const subject = encodeURIComponent("Add me to the Mitt's launch list");
       const body = encodeURIComponent(`Please add ${email} to the Mitt's launch list.`);
-      window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
+      location.href = `mailto:${siteEmail}?subject=${subject}&body=${body}`;
     });
   });
 
-  document.querySelectorAll("[data-contact-form]").forEach((contactForm) => {
-    contactForm.addEventListener("submit", (event) => {
+  document.querySelectorAll("[data-contact-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const data = new FormData(contactForm);
+      const data = new FormData(form);
       const subject = encodeURIComponent(`Website inquiry: ${data.get("topic") || "General"}`);
       const lines = [];
 
@@ -230,9 +239,9 @@
 
       lines.push("", String(data.get("message") || ""));
       const body = encodeURIComponent(lines.join("\n"));
-      const status = contactForm.querySelector("[data-form-status]") || document.querySelector("[data-form-status]");
+      const status = form.querySelector("[data-form-status]") || document.querySelector("[data-form-status]");
       if (status) status.textContent = "Opening your email app…";
-      window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
+      location.href = `mailto:${siteEmail}?subject=${subject}&body=${body}`;
     });
   });
 })();
