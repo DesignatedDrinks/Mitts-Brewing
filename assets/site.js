@@ -44,7 +44,6 @@
       label: "Brand",
       items: [
         ["Our Story", "story.html"],
-        ["About", "about.html"],
         ["Journal", "journal.html"]
       ]
     },
@@ -198,7 +197,7 @@
             <p>Canadian non-alcoholic beer. Make the moment.</p>
           </div>
           <div><h3>Explore</h3><a href="beers.html">Premium Lager</a><a href="story.html">Our story</a><a href="find.html">Find Mitt's</a><a href="journal.html">Journal</a></div>
-          <div><h3>Company</h3><a href="about.html">About</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
+          <div><h3>Company</h3><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
           <div><h3>Make the moment</h3><p>Launch dates, stockists and new releases.</p><form class="newsletter" data-newsletter><input type="email" name="email" placeholder="Email address" aria-label="Email address" autocomplete="email" inputmode="email" required><button class="button button-light" type="submit">Join</button></form><p class="form-status" data-newsletter-status aria-live="polite"></p></div>
         </div>
         <div class="container footer-bottom"><span>© ${year} Mitt's Brewing Co.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div>
