@@ -68,7 +68,7 @@
           <div><h3>Company</h3><a href="about.html">About</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
           <div><h3>Stay in the moment</h3><p>Be first to hear about the Premium Lager launch date, stockists and release updates.</p><form class="newsletter" data-newsletter><input type="email" name="email" placeholder="Email address" aria-label="Email address" required><button class="button button-light" type="submit">Join</button></form><p class="form-status" data-newsletter-status aria-live="polite"></p></div>
         </div>
-        <div class="container footer-bottom"><span>© ${year} Mitt's Brewing Co. A brand of Designated Drinks Inc.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div>
+        <div class="container footer-bottom"><span>© ${year} Mitt's Brewing Co.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div>
       </footer>`;
   }
 
