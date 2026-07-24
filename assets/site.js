@@ -62,9 +62,7 @@
           <div class="footer-brand stack">
             <a class="brand" href="index.html"><span class="brand-word">MITT'S</span><span class="brand-sub">Brewing Co.</span></a>
             <p>Modern Canadian non-alcoholic beer made for carefree moments, good company and the road ahead.</p>
-            <div class="socials" aria-label="Social media">
-              <a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="TikTok">TT</a>
-            </div>
+            <div class="socials" aria-label="Social media coming soon"><span aria-label="Instagram">IG</span><span aria-label="Facebook">FB</span><span aria-label="TikTok">TT</span></div>
           </div>
           <div><h3>Explore</h3><a href="beers.html">Our beers</a><a href="story.html">Our story</a><a href="find.html">Find Mitt's</a><a href="journal.html">Journal</a></div>
           <div><h3>Company</h3><a href="about.html">About</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
@@ -84,14 +82,22 @@
     });
   });
 
-  const contactForm = document.querySelector("[data-contact-form]");
-  contactForm?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(contactForm);
-    const subject = encodeURIComponent(`Website inquiry: ${data.get("topic") || "General"}`);
-    const body = encodeURIComponent(`Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`);
-    const status = document.querySelector("[data-form-status]");
-    if (status) status.textContent = "Opening your email app…";
-    window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
+  document.querySelectorAll("[data-contact-form]").forEach((contactForm) => {
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(contactForm);
+      const subject = encodeURIComponent(`Website inquiry: ${data.get("topic") || "General"}`);
+      const lines = [];
+      for (const [key, value] of data.entries()) {
+        if (!value || key === "message") continue;
+        const label = key.replace(/(^|_)(\w)/g, (_, space, letter) => `${space ? " " : ""}${letter.toUpperCase()}`);
+        lines.push(`${label}: ${value}`);
+      }
+      lines.push("", String(data.get("message") || ""));
+      const body = encodeURIComponent(lines.join("\n"));
+      const status = contactForm.querySelector("[data-form-status]") || document.querySelector("[data-form-status]");
+      if (status) status.textContent = "Opening your email app…";
+      window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
+    });
   });
 })();
