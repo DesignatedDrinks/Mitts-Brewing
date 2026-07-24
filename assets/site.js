@@ -1,5 +1,5 @@
 (() => {
-  const siteEmail = "hello@mittsbrewing.com";
+  const siteEmail = "mittsbrewing@gmail.com";
   const mobileQuery = window.matchMedia("(max-width: 1050px)");
 
   const runtimeStyles = document.createElement("style");
