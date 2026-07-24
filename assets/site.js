@@ -75,10 +75,12 @@
   document.querySelectorAll("[data-newsletter]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const email = new FormData(form).get("email");
+      const email = String(new FormData(form).get("email") || "");
       const status = form.parentElement.querySelector("[data-newsletter-status]") || document.querySelector("[data-newsletter-status]");
-      if (status) status.textContent = `Thanks — ${email} is on the launch list.`;
-      form.reset();
+      if (status) status.textContent = "Opening your email app to complete the request…";
+      const subject = encodeURIComponent("Add me to the Mitt's launch list");
+      const body = encodeURIComponent(`Please add ${email} to the Mitt's Brewing Co. launch list.`);
+      window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
     });
   });
 
