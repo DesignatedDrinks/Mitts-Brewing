@@ -35,4 +35,4 @@ The site is designed for GitHub Pages. In repository settings, set Pages to depl
 - Primary: navy, coastal blue, silver, cream
 - Personality: classy, timeless, Canadian, easygoing
 - Creative territory: modern design with carefree nostalgia
-- Master line: **Mitt's Makes the Moment.**
+- Master line: **Make the moment.**
