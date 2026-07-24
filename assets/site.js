@@ -1,6 +1,6 @@
 (() => {
   const navItems = [
-    ["Our Beers", "beers.html"],
+    ["Premium Lager", "beers.html"],
     ["Our Story", "story.html"],
     ["About", "about.html"],
     ["Find Mitt's", "find.html"],
@@ -21,7 +21,7 @@
   if (headerTarget) {
     headerTarget.innerHTML = `
       <a class="skip-link" href="#main">Skip to content</a>
-      <div class="announcement">Premium non-alcoholic beer. Canadian made. Launching soon.</div>
+      <div class="announcement">Mitt's Premium Lager. Canadian made. Launching soon.</div>
       <header class="site-header">
         <div class="container header-inner">
           <a class="brand" href="index.html" aria-label="Mitt's Brewing Co. home">
@@ -61,12 +61,12 @@
         <div class="container footer-main">
           <div class="footer-brand stack">
             <a class="brand" href="index.html"><span class="brand-word">MITT'S</span><span class="brand-sub">Brewing Co.</span></a>
-            <p>Modern Canadian non-alcoholic beer made for carefree moments, good company and the road ahead.</p>
+            <p>Mitt's Premium Lager is a modern Canadian non-alcoholic beer made for carefree moments, good company and the road ahead.</p>
             <p class="product-note">Social handles launching soon.</p>
           </div>
-          <div><h3>Explore</h3><a href="beers.html">Our beers</a><a href="story.html">Our story</a><a href="find.html">Find Mitt's</a><a href="journal.html">Journal</a></div>
+          <div><h3>Explore</h3><a href="beers.html">Premium Lager</a><a href="story.html">Our story</a><a href="find.html">Find Mitt's</a><a href="journal.html">Journal</a></div>
           <div><h3>Company</h3><a href="about.html">About</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
-          <div><h3>Stay in the moment</h3><p>Be first to hear about launch dates, stockists and new releases.</p><form class="newsletter" data-newsletter><input type="email" name="email" placeholder="Email address" aria-label="Email address" required><button class="button button-light" type="submit">Join</button></form><p class="form-status" data-newsletter-status aria-live="polite"></p></div>
+          <div><h3>Stay in the moment</h3><p>Be first to hear about the Premium Lager launch date, stockists and release updates.</p><form class="newsletter" data-newsletter><input type="email" name="email" placeholder="Email address" aria-label="Email address" required><button class="button button-light" type="submit">Join</button></form><p class="form-status" data-newsletter-status aria-live="polite"></p></div>
         </div>
         <div class="container footer-bottom"><span>© ${year} Mitt's Brewing Co. A brand of Designated Drinks Inc.</span><span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></div>
       </footer>`;
@@ -78,8 +78,8 @@
       const email = String(new FormData(form).get("email") || "");
       const status = form.parentElement.querySelector("[data-newsletter-status]") || document.querySelector("[data-newsletter-status]");
       if (status) status.textContent = "Opening your email app to complete the request…";
-      const subject = encodeURIComponent("Add me to the Mitt's launch list");
-      const body = encodeURIComponent(`Please add ${email} to the Mitt's Brewing Co. launch list.`);
+      const subject = encodeURIComponent("Add me to the Mitt's Premium Lager launch list");
+      const body = encodeURIComponent(`Please add ${email} to the Mitt's Premium Lager launch list.`);
       window.location.href = `mailto:hello@mittsbrewing.com?subject=${subject}&body=${body}`;
     });
   });
