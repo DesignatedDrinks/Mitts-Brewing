@@ -1,6 +1,9 @@
 (() => {
   const mobileNavFix = document.createElement("style");
   mobileNavFix.textContent = `
+    .eyebrow {
+      display: none !important;
+    }
     @media (max-width: 1050px) {
       [data-site-header] {
         position: relative;
@@ -26,6 +29,8 @@
     }
   `;
   document.head.appendChild(mobileNavFix);
+
+  document.querySelectorAll(".eyebrow").forEach((element) => element.remove());
 
   const navGroups = [
     {
