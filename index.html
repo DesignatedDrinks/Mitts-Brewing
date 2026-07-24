@@ -20,6 +20,7 @@
     .launch-can-card .card-media {
       min-height: 340px;
       padding: 20px;
+      background: #fff;
     }
     .launch-can-frame {
       position: relative;
@@ -38,6 +39,30 @@
       left: -47.273%;
       top: -24.528%;
       transform: none;
+    }
+    @media (min-width: 901px) {
+      .launch-can-card,
+      .launch-pack-card {
+        grid-template-rows: 520px auto;
+      }
+      .launch-pack-card {
+        display: grid;
+      }
+      .launch-can-card .card-media,
+      .launch-pack-card .card-media {
+        height: 520px;
+        min-height: 520px;
+        padding: 0;
+        background: #fff;
+      }
+      .launch-can-frame {
+        height: 520px;
+      }
+      .launch-pack-card .card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
     @media (max-width: 1050px) { .hero-art { object-position: 56% center; } }
     @media (max-width: 760px) {
@@ -87,9 +112,9 @@
           <div class="stack"><span class="eyebrow">First release</span><h2 class="display display-md">Premium Lager.</h2></div>
           <div class="stack"><p class="lead">Crisp. Clean. Easygoing.</p><div><a class="button button-outline" href="premium-lager.html">Explore Premium Lager</a></div></div>
         </div>
-        <div class="grid grid-2">
+        <div class="grid grid-2 launch-grid">
           <article class="card product-card launch-can-card"><div class="card-media"><div class="launch-can-frame"><img src="assets/Mitts.png?v=3" alt="Mitt's Premium Lager silver and blue can"></div></div><div class="card-body"><div class="product-meta"><div><span class="product-style">First release</span><h3>Premium Lager</h3><p class="product-note">Crisp. Clean. Easygoing.</p></div><a class="button" href="premium-lager.html">View lager</a></div></div></article>
-          <aside class="card"><div class="card-media"><img src="https://raw.githubusercontent.com/DesignatedDrinks/Mitts-Brewing/main/assets/mitts-premium-lager-four-pack.jpg" alt="Mitt's Premium Lager four-pack carton on a kitchen table" width="1254" height="1254" decoding="async"></div><div class="card-body stack"><span class="eyebrow">Built to bring along</span><h3 style="font-size:2rem">Four cold cans.</h3><p>Made for the fridge, the table and the road.</p></div></aside>
+          <aside class="card launch-pack-card"><div class="card-media"><img src="https://raw.githubusercontent.com/DesignatedDrinks/Mitts-Brewing/main/assets/mitts-premium-lager-four-pack.jpg" alt="Mitt's Premium Lager four-pack carton on a kitchen table" width="1254" height="1254" decoding="async"></div><div class="card-body stack"><span class="eyebrow">Built to bring along</span><h3 style="font-size:2rem">Four cold cans.</h3><p>Made for the fridge, the table and the road.</p></div></aside>
         </div>
       </div>
     </section>
