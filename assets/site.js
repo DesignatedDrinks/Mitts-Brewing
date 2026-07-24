@@ -1,4 +1,32 @@
 (() => {
+  const mobileNavFix = document.createElement("style");
+  mobileNavFix.textContent = `
+    @media (max-width: 1050px) {
+      [data-site-header] {
+        position: relative;
+        z-index: 2000;
+      }
+      .site-header {
+        z-index: 2001;
+        background: var(--paper);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+      .site-nav {
+        z-index: 2002;
+        bottom: auto;
+        height: calc(100vh - var(--mobile-nav-top));
+        height: calc(100dvh - var(--mobile-nav-top));
+        max-height: calc(100vh - var(--mobile-nav-top));
+        max-height: calc(100dvh - var(--mobile-nav-top));
+      }
+      .nav-backdrop {
+        z-index: 2000;
+      }
+    }
+  `;
+  document.head.appendChild(mobileNavFix);
+
   const navGroups = [
     {
       label: "Beer",
