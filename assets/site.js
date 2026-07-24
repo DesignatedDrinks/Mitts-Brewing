@@ -62,7 +62,7 @@
           <div class="footer-brand stack">
             <a class="brand" href="index.html"><span class="brand-word">MITT'S</span><span class="brand-sub">Brewing Co.</span></a>
             <p>Modern Canadian non-alcoholic beer made for carefree moments, good company and the road ahead.</p>
-            <div class="socials" aria-label="Social media coming soon"><span aria-label="Instagram">IG</span><span aria-label="Facebook">FB</span><span aria-label="TikTok">TT</span></div>
+            <p class="product-note">Social handles launching soon.</p>
           </div>
           <div><h3>Explore</h3><a href="beers.html">Our beers</a><a href="story.html">Our story</a><a href="find.html">Find Mitt's</a><a href="journal.html">Journal</a></div>
           <div><h3>Company</h3><a href="about.html">About</a><a href="wholesale.html">Wholesale</a><a href="contact.html">Contact</a><a href="shop.html">Shop</a></div>
