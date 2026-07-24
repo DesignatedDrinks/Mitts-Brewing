@@ -1,0 +1,12 @@
+{
+  "name": "Mitt's Brewing Co.",
+  "short_name": "Mitt's",
+  "description": "Premium Canadian non-alcoholic beer with modern design and carefree nostalgia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2efe8",
+  "theme_color": "#0d233d",
+  "icons": [
+    {"src": "assets/monogram.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
